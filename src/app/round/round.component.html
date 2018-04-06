@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" id="main-screen">
+  <div id="results">
+    <app-result></app-result>
+    <!--<app-result *ngIf="showResults()"></app-result>-->
+  </div>
+  <div id="assets">
+    <app-assets></app-assets>
+  </div>
+  <button id= "submit"
+          type="submit"
+          class="btn btn-primary btn-md"
+          (click)="onSubmit()"
+          [disabled]="canSubmit()">Submit</button>
+</div>
+<app-footer></app-footer>
+
+<!-- Modal Exit -->
+<div class="modal fade" id="myModal" tabindex="-1" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Exit</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to exit the game?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Continue playing</button>
+        <button type="button" class="btn btn-primary" onclick="exitOnClick()">Exit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal End Game -->
+<div class="modal fade" id="myModalEndGame" tabindex="-1" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Game completed</h4>
+      </div>
+      <div class="modal-body" id="modalEndGame">
+        <p id="myModalEndGameP">Are you sure you want to exit the game?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="exitOnClick()">Play Again</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal Exit -->
+<div class="modal fade" id="myModalNegativeCF" tabindex="-1" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Portfolio</h4>
+      </div>
+      <div class="modal-body">
+        <p>Your cash position cannot be negative. Please fix your selections!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fix selections</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+

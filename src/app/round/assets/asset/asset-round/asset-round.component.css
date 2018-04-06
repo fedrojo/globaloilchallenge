@@ -1,0 +1,18 @@
+
+.table-responsive {
+  margin-top: 5px;
+}
+
+.currency-column {
+  text-align: right;
+}
+
+.results-centered-bold {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.round-storyline {
+  font-style: italic;
+}

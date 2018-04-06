@@ -1,0 +1,17 @@
+.panel {
+  margin-bottom: 1px;
+  height: 95%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+
+.round-title {
+  font-weight: bold;
+}
+
+.nav {
+  margin-bottom: 15px;
+}

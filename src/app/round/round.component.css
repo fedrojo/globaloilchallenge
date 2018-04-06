@@ -1,0 +1,32 @@
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body {
+  padding-top: 70px;
+}
+
+#submit {
+  display: block;
+  margin: 0 auto;
+  width: 20%;
+}
+
+#results {
+  margin-top: 15px;
+
+}
+
+#assets {
+  margin-top: 15px;
+
+}
+
+#main-screen {
+  position: absolute;
+  width: 100%;
+  top: 50px;
+  bottom: 70px;
+  overflow-y: scroll;
+}

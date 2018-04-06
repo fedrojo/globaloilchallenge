@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Results</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-3 col-xs-12">
+        <p>Congratulations! Your final portfolio value is <strong>${{getFinalValue() | number: '1.0-0' }}</strong></p>
+        <p>The portfolio value has <strong>{{getPortfolioGrowthText()}} {{GetPortfolioGrowth() | number: '1.0-0' }}%</strong></p>
+      </div>
+      <div class="col-sm-9 col-xs-12">
+        <ngx-charts-line-chart
+          [view]="view"
+          [results]="multi"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="'Round'"
+          [yAxisLabel]="'Portfolio Value'"
+          [autoScale]="true"
+          >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="jumbotron">
+    <h1>Control Panel</h1>
+    <h3><strong>Game options</strong></h3>
+    <form class="form-inline" id="standAloneOptions">
+      <strong>Stand alone Game: </strong>
+      <label class="radio-inline">
+        <input type="radio" name="standAloneRadio" id="enableStandAlone" value="1" onClick="standAloneEnabled()">
+        Enabled
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="standAloneRadio" id="disableStandAlone" value="0" onClick="standAloneDisabled()">
+        Disabled
+      </label>
+    </form>
+
+    <div class="warRoom">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="warRoomName">War Room Name: </label>
+          <input type="text" class="form-control" id="warRoomName" placeholder="Room1">
+        </div>
+        <button type="button" class="btn btn-default" onclick="createWarRoom()">Create War Room</button>
+      </form>
+      <hr>
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="currentRound">Current Round: </label>
+          <input type="text" class="form-control" id="currentRound" placeholder="" readonly="">
+        </div>
+        <button id="btnMoveToNextRound" type="button" class="btn btn-default" onclick="moveToNext()" disabled>Move to Next</button>
+      </form>
+
+      <hr>
+
+      <div>
+
+        <ul class="nav nav-tabs">
+          <li class="active"><a id="tabTableResults" href="#tableResultsMain">Game status</a></li>
+          <li><a id="tabChartLeaderboard" href="#chartLeaderboard">Leaderboard</a></li>
+          <li><a id="tabChartProgress" href="#chartProgress">Progress</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="tableResultsMain" class = "table-results tab-pane fade in active">
+            <h4></h4>
+            <table id="tableResults" class="table table-condensed">
+              <thead>
+              <tr>
+                <th>Team Name</th>
+                <th>Round 1</th>
+                <th>Round 2</th>
+                <th>Round 3</th>
+                <th>Round 4</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div id="chartLeaderboard" class = "tab-pane fade">
+            <!-- CHART -->
+            <h4></h4>
+            <div id="chart_div_leaderboard" ></div>
+          </div>
+          <div id="chartProgress" class = "tab-pane fade">
+            <!-- CHART -->
+            <h4></h4>
+            <div id="chart_div_progress" ></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

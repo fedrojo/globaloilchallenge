@@ -1,0 +1,25 @@
+<footer>
+  <!--<p> <strong>World News:</strong> Oil Price: </p>-->
+  <!--<marquee behavior="scroll" direction="left">Your scrolling text goes here</marquee>-->
+  <h6>
+    <div *ngIf="this.gameService.currentRoundType === 'play'">
+      <strong>
+        <span class="glyphicon glyphicon-oil" aria-hidden="true"></span>
+        WORLD NEWS: Oil price: ${{ currentRound().oilPriceStart }}/bbl
+      </strong>
+      <marquee behavior="scroll" direction="left" scrollamount="5">
+        {{getRoundNewsFormatted()}}
+      </marquee>
+    </div>
+    <div *ngIf="this.gameService.currentRoundType !== 'play'">
+      <strong>
+        <span class="glyphicon glyphicon-oil" aria-hidden="true"></span>
+        WORLD NEWS:
+        Oil price start of  round: ${{ currentRound().oilPriceStart }}/bbl |
+        Average oil price during round: ${{currentRound().oilPriceAverage}}/bbl |
+        Oil price end of round: ${{currentRound().oilPriceEnd}}/bbl
+      </strong>
+      <marquee>{{getRoundNewsFormatted()}}</marquee>
+    </div>
+  </h6>
+</footer>

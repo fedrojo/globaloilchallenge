@@ -1,0 +1,16 @@
+.expand-collapse {
+  float: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.panel-title {
+  font-size: 11px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}

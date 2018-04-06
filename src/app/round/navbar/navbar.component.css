@@ -1,0 +1,78 @@
+.container-fluid {
+  background-color: rgb(14,46,71);
+  color: rgb(212,227,235);
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 50px;
+}
+
+a {
+  color: rgb(212,227,235);
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: rgb(69,69,74);
+}
+
+.navbar-default {
+  background-color: rgb(14,46,71);
+}
+
+.navbar-default a {
+  color: rgb(212,227,235);
+  padding-left: 20px;
+}
+
+.navbar-default p {
+  color: rgb(212,227,235);
+  padding-left: 20px;
+}
+
+.navbar-default input {
+  background-color: rgb(61,156,204);
+  color: rgb(212,227,235);
+  border-color: rgb(61,156,204);
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: rgb(212,227,235);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgb(212,227,235);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgb(212,227,235);
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: rgb(212,227,235);
+  opacity: 1;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  background-color: rgb(20,62,84);
+  color: rgb(212,227,235);
+}
+
+.navbar-brand {
+  font-family: raleway;
+  font-size: 13px;
+  letter-spacing: 4px;
+}
+
+a {
+  cursor: pointer;
+}
+
+@keyframes blink {
+  50% { border-color: #ff0000; }
+}
+
+.cash-in-hand{ /*or other element you want*/
+  color: red;
+  animation: blink .5s step-end infinite alternate;
+  border: 1px solid rgb(20,62,84) ;
+
+}
+

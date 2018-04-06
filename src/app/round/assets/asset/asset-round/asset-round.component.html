@@ -1,0 +1,44 @@
+<div class="round-storyline" *ngIf="round === 1">{{asset.storyline}}</div>
+<div class="round-storyline" *ngIf="round > 1">{{previousSelectedBranch?.storyline}}</div>
+<form [formGroup]="optionsForm" *ngIf="branches">
+  <table class="table table-responsive">
+    <thead>
+    <th>Options</th>
+    <th class="currency-column">Cash Impact</th>
+    <th class="currency-column">Future CF</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let roundOption of branches; let i = index"
+        [ngStyle]="{'font-weight':  roundOption === selectedBranch ? 'bold' : ''}">
+      <td class="col-xs-8">
+        <input type="radio"
+               formControlName="option"
+               [value]="i"
+               (change)="onOptionChanged()"
+                [ngStyle]="{'display': getRoundType() === 1 ? 'none' : ''}">
+        <span >{{roundOption.description}}</span>
+      </td>
+      <td class="col-xs-2 currency-column">{{roundOption.cashImpact | currency:'USD':true:'1.0-0' }}</td>
+      <td class="col-xs-2 currency-column">{{roundOption.expectedFutureCashFlow | currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+<div *ngIf="getRoundType() === 1">
+  <table class="table table-responsive">
+    <thead>
+    <th>Results</th>
+    <th class="currency-column">Achieved CF</th>
+    <th class="currency-column">Expected Remaining CF</th>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="col-xs-8">
+        <span>{{selectedBranch?.storyline}}</span>
+      </td>
+      <td class="col-xs-2 currency-column">{{selectedBranch?.achievedCF | currency:'USD':true:'1.0-0' }}</td>
+      <td class="col-xs-2 currency-column">{{selectedBranch?.expectedRemainingCF | currency:'USD':true:'1.0-0' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="thumbnail">
+      <img src="../../assets/mainpicture.png">
+    </div>
+
+
+    <form ngNativeValidate [formGroup]="loginForm">
+      <div class="form-group">
+        <label for="teamName">Team Name</label>
+        <input type="text"
+               class="form-control"
+               id="teamName"
+               placeholder="Team Name"
+               formControlName="teamName"
+               required>
+      </div>
+      <div class="form-group">
+        <label for="teamMembers">Team Members</label>
+        <input type="text"
+               class="form-control"
+               id="teamMembers"
+               placeholder="John Doe"
+               formControlName="teamMembers">
+      </div>
+      <div class="form-group">
+        <button type="submit"
+                class="btn btn-default btn-lg btn-block"
+                id="btnPlayAlone"
+                (click)="onPlayStandAlone()"
+                [disabled] = "!standAlonePlayAllowed">
+          Play Stand Alone Game
+        </button>
+      </div>
+      <div class="form-group">
+        <label for="warRoom">War room:</label>
+        <input type="text"
+               class="form-control"
+               id="warRoom"
+               placeholder="Room1"
+               formControlName="warRoom">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btnJoinWarRoom" formaction="round1.html" onclick="joinWarRoom()" >Join war room!</button>
+      </div>
+    </form>
+  </div>
+</div>

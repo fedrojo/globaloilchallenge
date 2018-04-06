@@ -1,0 +1,27 @@
+#standAloneOptions {
+  margin-top: 30px;
+  padding: 10px;
+  border : 1px solid black;
+}
+
+#standAloneOptions {
+  margin-top: 30px;
+  padding: 10px;
+  border : 1px solid black;
+}
+
+.warRoom {
+  margin-top: 30px;
+  padding: 10px;
+  border : 1px solid black;
+}
+
+.jumbotron {
+  color: #2c3e50;
+  /*max-height: 200px;*/
+  padding : 10px;
+}
+
+hr {
+  border-color:  black;
+}
