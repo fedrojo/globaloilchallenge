@@ -28,12 +28,6 @@ export class AssetsComponent implements OnInit {
 
   }
 
-  onCollapseExpand(status: boolean) {
-    this.assetComponents.forEach((assetComponent) => {
-      assetComponent.assetCollaspsed(status);
-    })
-  }
-
   onRandomSelection() {
     this.gameService.randomSelection();
 

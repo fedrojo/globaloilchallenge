@@ -17,8 +17,10 @@ import { AssetComponent } from './round/assets/asset/asset.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AssetRoundComponent } from './round/assets/asset/asset-round/asset-round.component';
 import { ResultComponent } from './round/result/result.component';
-import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ComboChartComponent } from './shared/combo-chart/combo-chart.component';
+import {ComboSeriesVerticalComponent} from "./shared/combo-chart/combo-series-vertical.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     AssetsComponent,
     AssetComponent,
     AssetRoundComponent,
-    ResultComponent
+    ResultComponent,
+    ComboChartComponent,
+    ComboSeriesVerticalComponent
   ],
   imports: [
     BrowserModule,

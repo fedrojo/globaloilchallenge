@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "@swimlane/ngx-charts": "^7.2.0",
     "angular-font-awesome": "^2.0.3",
+    "angular2-fusioncharts": "^1.0.3",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "d3": "^5.0.0",

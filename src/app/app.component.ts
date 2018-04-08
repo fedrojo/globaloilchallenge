@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import * as firebase from 'firebase';
+import {Alert} from "selenium-webdriver";
 
 
 
@@ -25,4 +26,5 @@ export class AppComponent {
 
     firebase.initializeApp(config);
   }
+
 }

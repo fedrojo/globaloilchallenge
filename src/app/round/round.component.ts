@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GameService} from "../game.service";
 import {Router} from "@angular/router";
 
@@ -15,29 +15,39 @@ export class RoundComponent implements OnInit {
   ngOnInit() {
   }
 
+  getSubmitButtonText() {
+    if (this.gameService.currentRoundType === 'play') {
+      return 'Submit';
+    } else if (this.gameService.currentRound < this.gameService.rounds.length) {
+      return 'Next Round';
+    } else {
+      return 'Exit';
+    }
+  }
+
   onSubmit() {
 
     if (this.gameService.currentRoundType === 'play') {
       this.gameService.submitRound();
-    } else {
+    } else if (this.gameService.currentRound < this.gameService.rounds.length) {
       this.gameService.nextRound();
+    } else {
+      this.onExit();
     }
 
   }
 
   canSubmit() {
-
-    if (this.gameService.currentRound == this.gameService.rounds.length  &&
-    this.gameService.currentRoundType === 'results') {
-      return true;
-    }
-
-    return !this.gameService.isRoundValid();
+    return (!this.gameService.isRoundValid() && !this.showResults());
   }
 
   showResults() {
-    return (this.gameService.currentRound == this.gameService.rounds.length  &&
-      this.gameService.currentRoundType === 'results');
+    return (this.gameService.currentRoundType === 'results');
+  }
+
+  onExit() {
+    this.gameService.exitGame();
+    this.router.navigate(['']);
   }
 
 

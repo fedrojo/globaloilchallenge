@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GameService} from "../../game.service";
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {ComboChartComponent} from "../../shared/combo-chart/combo-chart.component";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -10,30 +11,67 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 })
 export class ResultComponent implements OnInit {
 
-  multi: any[] =   [{
-    "name": "Germany",
-    "series": [
-      {
-        "name": "1",
-        "value": 3000
-      },
-      {
-        "name": "2",
-        "value": 4000
-      },
-      {
-        "name": "3",
-        "value": 2100
-      }
+  comboBarScheme = {
+    name: 'singleLightBlue',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b'
     ]
-  }];
+  };
 
-  view: any[] = [500, 250];
+  lineChartScheme = {
+    name: 'coolThree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b', '#7aa3e5'
+    ]
+  };
+
+  lineChartSeries: any[] =   [
+    {
+      "name": "Portfolio Value",
+      "series": []
+    },
+  ];
+
+  barChartSeries: any = [];
+
+  view: any[] = [500, 150];
 
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private router: Router) { }
 
   ngOnInit() {
+    let roundCount = 1;
+    this.barChartSeries.push({name: "R0", value: this.gameService.rounds[0].oilPriceStart});
+    this.lineChartSeries[0].series.push({name: "R0", value: this.gameService.initialCash});
+    while (roundCount <= this.gameService.rounds.length) {
+      this.barChartSeries.push({name: "R" + roundCount.toFixed(), value: 0 });
+      this.lineChartSeries[0].series.push({name: "R" + roundCount.toFixed(), value: 0});
+      roundCount++;
+    }
+
+
+  }
+
+  getOilPriceSeries() {
+    let roundCount = 1;
+    while (roundCount <= this.gameService.currentRound) {
+      this.barChartSeries[roundCount].value = this.gameService.rounds[roundCount - 1].oilPriceEnd;
+      roundCount++;
+    }
+    return this.barChartSeries;
+  }
+
+  getPortfolioValuesSeries() {
+    let roundCount = 1;
+    while (roundCount <= this.gameService.currentRound) {
+      this.lineChartSeries[0].series[roundCount].value = Math.round(this.gameService.portfolioValues[roundCount]);
+      roundCount++;
+    }
+    return this.lineChartSeries;
   }
 
   getFinalValue() {
@@ -54,6 +92,34 @@ export class ResultComponent implements OnInit {
       return (100*(this.gameService.initialCash - cValue) / this.gameService.initialCash);
     }
 
+  }
+
+
+  /*
+  **
+  Combo Chart
+  **
+  [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale"
+  exposes the left and right min and max axis values for custom scaling, it is probably best to
+  scale one axis in relation to the other axis but for flexibility to scale either the left or
+  right axis bowth were exposed.
+  **
+  */
+
+  yLeftAxisScale(min, max) {
+    return {min: `${min}`, max: `${max}`};
+  }
+
+  yRightAxisScale(min, max) {
+    return {min: `${min}`, max: `${max}`};
+  }
+
+  yLeftTickFormat(data) {
+    return `$${data.toLocaleString()}`;
+  }
+
+  yRightTickFormat(data) {
+    return `$${data.toLocaleString()}`;
   }
 
 }

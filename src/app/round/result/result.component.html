@@ -5,24 +5,36 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-sm-3 col-xs-12">
-        <p>Congratulations! Your final portfolio value is <strong>${{getFinalValue() | number: '1.0-0' }}</strong></p>
-        <p>The portfolio value has <strong>{{getPortfolioGrowthText()}} {{GetPortfolioGrowth() | number: '1.0-0' }}%</strong></p>
+        <p>Your portfolio value is <strong>${{getFinalValue() | number: '1.0-0' }}</strong></p>
+        <p>The portfolio has <strong>{{getPortfolioGrowthText()}} {{GetPortfolioGrowth() | number: '1.0-0' }}%</strong></p>
       </div>
       <div class="col-sm-9 col-xs-12">
-        <ngx-charts-line-chart
+        <combo-chart-component
+          class="chart-container"
           [view]="view"
-          [results]="multi"
+          [scheme]="comboBarScheme"
+          [colorSchemeLine]="lineChartScheme"
+          [results]="getOilPriceSeries()"
+          [animations]="false"
+          [lineChart]="getPortfolioValuesSeries()"
+          [tooltipDisabled]="false"
+          [yAxisTickFormatting]="yLeftTickFormat"
+          [yLeftAxisScaleFactor]="yLeftAxisScale"
+          [yRightAxisScaleFactor]="yRightAxisScale"
+          [yRightAxisTickFormatting]="yRightTickFormat"
           [gradient]="false"
           [xAxis]="true"
           [yAxis]="true"
           [legend]="false"
-          [showXAxisLabel]="true"
+          [legendTitle]=""
+          [showGridLines]="true"
+          [showXAxisLabel]="false"
           [showYAxisLabel]="true"
-          [xAxisLabel]="'Round'"
-          [yAxisLabel]="'Portfolio Value'"
-          [autoScale]="true"
-          >
-        </ngx-charts-line-chart>
+          [showRightYAxisLabel]="true"
+          [xAxisLabel]=""
+          [yAxisLabel]="'Oil Price'"
+          [yAxisLabelRight]="'Portfolio Value'">
+        </combo-chart-component>
       </div>
     </div>
 

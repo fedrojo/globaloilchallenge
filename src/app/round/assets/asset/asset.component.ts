@@ -16,7 +16,6 @@ export class AssetComponent implements OnInit {
 
   @Input()  asset: Asset;
 
-  collapsed = false;
   roundToShow = 1;
   activeRoundWhenRoundToShowClicked = 1;
 
@@ -32,13 +31,6 @@ export class AssetComponent implements OnInit {
 
   }
 
-  onPanelHeadingClick() {
-    this.collapsed = !this.collapsed;
-  }
-
-  public assetCollaspsed(collapsed: boolean ) {
-    this.collapsed = collapsed;
-  }
 
   getRounds() {
     return new Array(this.gameService.currentRound);

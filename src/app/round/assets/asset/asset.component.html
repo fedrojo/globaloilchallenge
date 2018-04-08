@@ -1,7 +1,6 @@
 <div [ngClass]="getPanelStyle()" class="panel">
-  <div class="panel-heading pointer" (click)="onPanelHeadingClick()">{{asset.name}}</div>
-  <div class="panel-body"
-       [ngStyle]="{'display': collapsed ? 'none' : 'block'}">
+  <div class="panel-heading pointer">{{asset.name}}</div>
+  <div class="panel-body">
     <ul class="nav nav-tabs">
       <li *ngFor="let round of getRounds(); let i = index;"
           role="presentation" [ngClass]="getRoundToShow() === (i + 1) ? 'active' : ''">

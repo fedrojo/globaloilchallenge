@@ -8,7 +8,9 @@ import {Branch} from "./round/assets/branch.model";
 @Injectable()
 export class GameService {
 
-  initialCash = 30000;
+  initialCash = 5000;
+
+  gameStarted = false;
 
   teamName = 'Team Name';
 
@@ -21,6 +23,7 @@ export class GameService {
   companyValuation: number = 0;
 
   assetSelection: {asset: string, selections: {round: number, selection: number}[]}[];
+  portfolioValues: number[] = [];
 
   constructor(private assetService: AssetsService,
               private roundService: RoundsService) {
@@ -30,14 +33,17 @@ export class GameService {
   }
 
   initializeGame() {
+    this.gameStarted = true;
     this.currentRound = 1;
     this.currentRoundType = 'play';
     this.cashInHand = this.initialCash;
     this.companyValuation = this.cashInHand;
+    this.portfolioValues = [];
     this.assetSelection = [];
     for (const asset of this.assets) {
       this.assetSelection.push({asset: asset.name, selections: []});
     }
+    this.portfolioValues.push(this.initialCash);
 
   }
 
@@ -63,6 +69,7 @@ export class GameService {
   submitRound() {
     this.currentRoundType = 'results';
     this.updateCashAndAssetValuation();
+    this.portfolioValues.push(this.companyValuation);
   }
 
   nextRound() {
@@ -174,6 +181,11 @@ export class GameService {
     let assetResults = this.assetSelection.find(i => i.asset === asset);
     let result = assetResults.selections.find( i => i.round === round);
     return result ? result.selection : null;
+  }
+
+  exitGame() {
+    this.initializeGame();
+    this.gameStarted = false;
   }
 
 }
