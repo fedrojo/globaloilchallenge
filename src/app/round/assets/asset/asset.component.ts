@@ -65,4 +65,8 @@ export class AssetComponent implements OnInit {
     return this.roundToShow;
   }
 
+  openAssetCard(assetName: string) {
+    // window.open('/assets/' + assetName + '.pdf');
+  }
+
 }

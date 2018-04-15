@@ -8,7 +8,7 @@ import {Branch} from "./round/assets/branch.model";
 @Injectable()
 export class GameService {
 
-  initialCash = 5000;
+  initialCash = 3000;
 
   gameStarted = false;
 
@@ -29,7 +29,6 @@ export class GameService {
               private roundService: RoundsService) {
     this.assets = this.assetService.assets;
     this.rounds = this.roundService.rounds;
-    this.initializeGame();
   }
 
   initializeGame() {

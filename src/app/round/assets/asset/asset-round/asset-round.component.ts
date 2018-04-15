@@ -30,7 +30,6 @@ export class AssetRoundComponent implements OnInit {
 
     let selection: number  = this.gameService.getRoundAssetSelection(this.asset.name, this.round);
 
-
     this.getBranches()
 
 

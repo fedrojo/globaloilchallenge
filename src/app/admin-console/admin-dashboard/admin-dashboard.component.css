@@ -1,0 +1,11 @@
+.glyphicon {
+  font-size: 16px;
+}
+
+li {
+  cursor: pointer;
+}
+
+.panel-body {
+  min-height: 500px;
+}

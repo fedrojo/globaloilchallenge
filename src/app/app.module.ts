@@ -21,6 +21,16 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { ComboChartComponent } from './shared/combo-chart/combo-chart.component';
 import {ComboSeriesVerticalComponent} from "./shared/combo-chart/combo-series-vertical.component";
+import {AuthGuard} from "./login/auth-guard.service";
+import { DummyComponentComponent } from './dummy-component/dummy-component.component';
+import { AdminDashboardComponent } from './admin-console/admin-dashboard/admin-dashboard.component';
+import {AdminService} from "./admin-console/admin.service";
+import {AdminGuard} from "./admin-console/admin-guard.service";
+import { GameManagementComponent } from './admin-console/admin-dashboard/game-management/game-management.component';
+import { StatusTableComponent } from './admin-console/admin-dashboard/game-management/status-table/status-table.component';
+import { TableScoresComponent } from './admin-console/admin-dashboard/game-management/table-scores/table-scores.component';
+import { LeaderboardChartComponent } from './admin-console/admin-dashboard/game-management/leaderboard-chart/leaderboard-chart.component';
+import { ProgressChartComponent } from './admin-console/admin-dashboard/game-management/progress-chart/progress-chart.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +45,14 @@ import {ComboSeriesVerticalComponent} from "./shared/combo-chart/combo-series-ve
     AssetRoundComponent,
     ResultComponent,
     ComboChartComponent,
-    ComboSeriesVerticalComponent
+    ComboSeriesVerticalComponent,
+    DummyComponentComponent,
+    AdminDashboardComponent,
+    GameManagementComponent,
+    StatusTableComponent,
+    TableScoresComponent,
+    LeaderboardChartComponent,
+    ProgressChartComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +63,14 @@ import {ComboSeriesVerticalComponent} from "./shared/combo-chart/combo-series-ve
     NgxChartsModule,
     BrowserAnimationsModule
   ],
-  providers: [AssetsService, RoundsService, GameService],
+  providers: [
+    AuthGuard,
+    AssetsService,
+    RoundsService,
+    GameService,
+    AdminService,
+    AdminGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

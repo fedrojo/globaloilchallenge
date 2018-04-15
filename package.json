@@ -21,7 +21,8 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "@swimlane/ngx-charts": "^7.2.0",
+    "@swimlane/ngx-charts": "^6.0.2",
+    "angular": "^1.6.9",
     "angular-font-awesome": "^2.0.3",
     "angular2-fusioncharts": "^1.0.3",
     "bootstrap": "^3.3.7",
@@ -32,7 +33,7 @@
     "jquery": "^3.2.1",
     "rxjs": "^5.4.1",
     "tether": "^1.4.1",
-    "typescript": "^2.9.0-dev.20180405",
+    "typescript": "^2.9.0-dev.20180412",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

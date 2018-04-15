@@ -1,0 +1,127 @@
+<div class="form-inline">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group width-100">
+        <input class="form-control width-100"
+               [ngClass]="(gameLoaded) ? '' : 'display-none'  "
+               value="{{loadedGame?.name}}"
+               [disabled]="true">
+        <div [formGroup]="warRoomForm">
+          <select class="form-control width-100"
+                  [ngClass]="(!addMode && !gameLoaded) ? '' : 'display-none'  "
+                  formControlName="warRoom"
+                  (change)="onWarRoomChanged()">
+            <option *ngFor="let room of warRooms"
+                    [value]="room"> {{room}}
+            </option>
+          </select>
+        </div>
+        <input class="form-control width-100"
+               [ngClass]="(addMode) ? '' : 'display-none'  "
+               id="addWarRoom"
+               autofocus
+               (keyup)="isWarRoomNameValid()"
+               #addWarRoom>
+      </div>
+    </div>
+    <div *ngIf="!addMode && !gameLoaded">
+      <div class="col-xs-2">
+        <div class="form-group">
+          <a class="pointer" (click)="onLoadWarRoom()">
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Load
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!addMode && !gameLoaded">
+      <div class="col-xs-2">
+        <div class="form-group">
+          <a class="pointer" (click)="onAddWarRoom()">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="addMode">
+      <div class="col-xs-2">
+        <div class="form-group">
+          <a [ngClass]="!validWarRoomName ? 'disabled' : 'pointer'"
+             (click)="onWarRoomSave()">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>Save
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="addMode || gameLoaded">
+      <div class="col-xs-2">
+        <div class="form-group">
+          <a class="pointer"  (click)="onCancelEdit()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Cancel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="gameLoaded">
+  <hr>
+  <div class="row row-round">
+    <div class="col-md-2 col-xs-12">
+      <button id="btnMoveToNextRound" type="button" class="btn btn-default" onclick="moveToNext()" disabled>Next Round</button>
+    </div>
+    <div class="col-md-10 col-xs-12">
+      <div class="row">
+        <div class="col-xs-2">
+          Awaiting Players
+        </div>
+        <div class="col-xs-2">
+          Round 1
+        </div>
+        <div class="col-xs-2">
+          Round 2
+        </div>
+        <div class="col-xs-2">
+          Round 3
+        </div>
+        <div class="col-xs-2">
+          Round 4
+        </div>
+        <div class="col-xs-2">
+          Finalized
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </div>
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        </div>
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        </div>
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        </div>
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        </div>
+        <div class="col-xs-2">
+          <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <span>Refresh in {{timeToRefresh}}</span> <a class="pointer" (click)="refreshGame()">Refresh now</a>
+    <ul class="nav nav-tabs">
+      <li [ngClass]="activeView === 0 ? 'active' : ''" role="presentation"><a (click)="activeView = 0">Status</a></li>
+      <li [ngClass]="activeView === 1 ? 'active' : ''" role="presentation"><a (click)="activeView = 1">Table</a></li>
+      <li [ngClass]="activeView === 2 ? 'active' : ''" role="presentation"><a (click)="activeView = 2">Leaderboard</a></li>
+      <li [ngClass]="activeView === 3 ? 'active' : ''" role="presentation"><a (click)="activeView = 3">Progress</a></li>
+    </ul>
+    <app-status-table *ngIf="activeView === 0"></app-status-table>
+    <app-table-scores *ngIf="activeView === 1"></app-table-scores>
+    <app-leaderboard-chart *ngIf="activeView === 2"></app-leaderboard-chart>
+    <app-progress-chart *ngIf="activeView === 3"></app-progress-chart>
+  </div>
+</div>

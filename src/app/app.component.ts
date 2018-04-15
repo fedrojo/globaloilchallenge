@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import * as firebase from 'firebase';
-import {Alert} from "selenium-webdriver";
 
 
 
@@ -15,16 +14,16 @@ export class AppComponent {
   constructor() {
 
     // Initialize Firebase
-    const config = {
-      apiKey: "AIzaSyAwx0qNlM60g0aPatJDw6sZUKSMmkIOAVs",
-      authDomain: "oilandgaschallenge.firebaseapp.com",
-      databaseURL: "https://oilandgaschallenge.firebaseio.com",
-      projectId: "oilandgaschallenge",
-      storageBucket: "oilandgaschallenge.appspot.com",
-      messagingSenderId: "418012242374"
+    var config = {
+      apiKey: "AIzaSyCp44jUSzP9HerlHAeKajM4tzEX-FHSQ2c",
+      authDomain: "oilandgaschallengev2.firebaseapp.com",
+      databaseURL: "https://oilandgaschallengev2.firebaseio.com",
+      projectId: "oilandgaschallengev2",
+      storageBucket: "oilandgaschallengev2.appspot.com",
+      messagingSenderId: "744231213842"
     };
-
     firebase.initializeApp(config);
+
   }
 
 }

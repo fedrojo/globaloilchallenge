@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   onPlayStandAlone() {
+    this.gameService.initializeGame();
     this.gameService.teamName = this.loginForm.value.teamName;
     this.router.navigate(['round']);
   }
