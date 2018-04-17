@@ -31,6 +31,8 @@ import { StatusTableComponent } from './admin-console/admin-dashboard/game-manag
 import { TableScoresComponent } from './admin-console/admin-dashboard/game-management/table-scores/table-scores.component';
 import { LeaderboardChartComponent } from './admin-console/admin-dashboard/game-management/leaderboard-chart/leaderboard-chart.component';
 import { ProgressChartComponent } from './admin-console/admin-dashboard/game-management/progress-chart/progress-chart.component';
+import { StatusBarComponent } from './admin-console/status-bar/status-bar.component';
+import {StatusBarService} from "./admin-console/status-bar/status-bar.service";
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { ProgressChartComponent } from './admin-console/admin-dashboard/game-man
     StatusTableComponent,
     TableScoresComponent,
     LeaderboardChartComponent,
-    ProgressChartComponent
+    ProgressChartComponent,
+    StatusBarComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { ProgressChartComponent } from './admin-console/admin-dashboard/game-man
     RoundsService,
     GameService,
     AdminService,
-    AdminGuard
+    AdminGuard,
+    StatusBarService
   ],
   bootstrap: [AppComponent]
 })

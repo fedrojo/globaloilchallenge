@@ -7,10 +7,10 @@
       <div class="row">
         <div class="col-xs-12 col-sm-6"
               [ngClass]="game.cashInHand < 0 ? 'cash-in-hand' : ''">
-          <a>Cash in hand:</a> ${{game.cashInHand | number: '1.0-0'}}
+          <a>Cash in hand:</a> {{game.cashInHand | currency:'USD':true:'1.0-0'}}
         </div>
         <div class="col-xs-12 col-sm-6">
-          <a>Company valuation:</a> ${{game.companyValuation | number: '1.0-0'}}
+          <a>Company valuation:</a> {{game.companyValuation | currency:'USD':true:'1.0-0'}}
         </div>
       </div>
     </div>

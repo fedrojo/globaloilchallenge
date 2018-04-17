@@ -24,4 +24,16 @@ a.disabled {
   color: #ccc;
 }
 
+.glyphicon-off {
+  color: darkred;
+}
+
+.glyphicon-ok-circle {
+  color: darkgreen;
+}
+
+
+.display-none {
+  display: none;
+}
 

@@ -59,7 +59,6 @@ export class AdminService {
       return firebase.database().ref('management/allowStandAlone').set(managementSettings.allowStandAlone)
         .catch(
           (err) => {
-            console.log('here');
             console.log(err);
             return false;
           }
@@ -71,7 +70,6 @@ export class AdminService {
         );
     }
     catch (error) {
-      console.log('there');
       console.log(error);
       return false;
     }

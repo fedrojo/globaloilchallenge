@@ -1,16 +1,25 @@
-<p>
-  status-table works!
-</p>
-<p>
-  status-table works!
-</p>
-<p>
-  status-table works!
-</p>
-<p>
-  status-table works!
-</p>
-<p>
-  status-table works!
-</p>
-
+<div class="main">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Logged</th>
+        <th>R1</th>
+        <th>R2</th>
+        <th>R3</th>
+        <th>R4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of currentGame?.players"
+          [ngClass]="player.currentRound === currentGame.currentRound ? 'success' : ''">
+        <td>{{player.name}}</td>
+        <td><span class="glyphicon glyphicon-ok" *ngIf="player.currentRound >= 0"></span></td>
+        <td><span class="glyphicon glyphicon-ok" *ngIf="player.currentRound >= 1"></span></td>
+        <td><span class="glyphicon glyphicon-ok" *ngIf="player.currentRound >= 2"></span></td>
+        <td><span class="glyphicon glyphicon-ok" *ngIf="player.currentRound >= 3"></span></td>
+        <td><span class="glyphicon glyphicon-ok" *ngIf="player.currentRound >= 4"></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

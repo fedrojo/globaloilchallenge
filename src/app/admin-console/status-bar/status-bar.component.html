@@ -1,0 +1,3 @@
+<div class="alert" [ngClass]="statusBarService.alertType" *ngIf="statusBarService.showAlert">
+  <strong>{{statusBarService.title}}</strong> {{statusBarService.message}}
+</div>

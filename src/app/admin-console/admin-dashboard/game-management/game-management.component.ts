@@ -3,6 +3,11 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {setInterval} from "timers";
 import {GameManagementService} from "./game-management.service";
 import {Game} from "./game-management.model";
+import {LeaderboardChartComponent} from "./leaderboard-chart/leaderboard-chart.component";
+import {StatusTableComponent} from "./status-table/status-table.component";
+import {TableScoresComponent} from "./table-scores/table-scores.component";
+import {ProgressChartComponent} from "./progress-chart/progress-chart.component";
+import {StatusBarService} from "../../status-bar/status-bar.service";
 
 @Component({
   selector: 'app-game-management',
@@ -14,6 +19,10 @@ export class GameManagementComponent implements OnInit {
 
   @ViewChild('addWarRoom') addWarRoomInput: ElementRef;
 
+  @ViewChild('statustable') statusTable: StatusTableComponent;
+  @ViewChild('tablescores') tableScores: TableScoresComponent;
+  @ViewChild('leaderboard') leaderboardChart: LeaderboardChartComponent;
+  @ViewChild('progress') progressChart: ProgressChartComponent;
 
   addMode = false;
   gameLoaded = false;
@@ -31,7 +40,10 @@ export class GameManagementComponent implements OnInit {
 
   activeView = 0;
 
-  constructor(private gameManagementService: GameManagementService) { }
+  timerRef;
+
+  constructor(private gameManagementService: GameManagementService,
+              private statusBarService: StatusBarService) { }
 
   ngOnInit() {
 
@@ -39,15 +51,16 @@ export class GameManagementComponent implements OnInit {
       'warRoom': new FormControl('')
     });
 
-    this.gameManagementService.initialize();
-    this.warRooms = this.gameManagementService.games;
-
-    // this.smartScoreService.getSmartScores().then(
-    //   (smartScores: SmartScore[]) => {
-    //     this.smartScores =  smartScores;
-    //     this.smartScoreForm.setValue({smartScore: this.smartScores[0].id});
-    //     this.selectedSmartScore = this.smartScores[0];
-    //   });
+    this.gameManagementService.getGames()
+      .then(
+      () => {
+        this.warRooms = this.gameManagementService.games;
+        this.warRoomForm.setValue( { warRoom: this.warRooms[0]})
+      })
+      .catch(
+      (err) => {
+        this.statusBarService.setTempStatus('Error - Unable to load games. ', err.message);
+      });
 
   }
 
@@ -70,37 +83,57 @@ export class GameManagementComponent implements OnInit {
       this.addWarRoomInput.nativeElement.value = '';
     }
 
+    if (this.timerRef) {
+      clearInterval(this.timerRef._id)
+      this.timerRef = null;
+    }
+
 
   }
 
   onWarRoomSave() {
     if (this.addMode) {
       const newName = this.addWarRoomInput.nativeElement.value;
-      this.warRooms.push((newName));
-      this.addMode = false;
-      this.addWarRoomInput.nativeElement.value = '';
-      this.warRoomForm.setValue({warRoom: newName});
-      this.onWarRoomChanged();
-      this.onLoadWarRoom();
-      // const smartScore: SmartScore = new SmartScore(newName, newName, false, []);
-      // this.smartScoreService.addSmartScore(smartScore)
-      //   .subscribe( (smartScores: SmartScore[]) => {
-      //     this.smartScores = smartScores;
-
-      //   });
+      if (this.gameManagementService.createGame(newName)) {
+        this.statusBarService.setTempStatus('Game Created', '', false);
+        this.warRooms = this.gameManagementService.games;
+        this.addMode = false;
+        this.addWarRoomInput.nativeElement.value = '';
+        this.warRoomForm.setValue({warRoom: newName});
+        this.onWarRoomChanged();
+        this.onLoadWarRoom();
+      } else {
+        this.statusBarService.setTempStatus('Error', 'Game could not be created', true);
+      }
     }
   }
 
   onLoadWarRoom() {
-    this.gameLoaded = true;
-    this.gameManagementService.loadGame(this.warRoomForm.value.warRoom);
-    this.loadedGame = this.gameManagementService.gameDetail;
-    this.setRefreshTimer();
-    console.log(this.loadedGame);
+
+
+    this.gameManagementService.loadGame(this.warRoomForm.value.warRoom)
+      .then(
+        () => {
+          this.gameLoaded = true;
+          this.loadedGame = this.gameManagementService.currentGame;
+          this.updateView();
+          this.setRefreshTimer();
+        })
+      .catch(
+        (err) => {
+          this.statusBarService.setTempStatus('Error - Unable to load game. ', err.message);
+          this.onCancelEdit();
+        });
   }
 
   setRefreshTimer() {
-    setInterval( () => {
+    this.timeToRefresh = this.refreshInterval;
+    if (this.timerRef) {
+      clearInterval(this.timerRef._id);
+    }
+
+
+    this.timerRef = setInterval( () => {
       if (this.timeToRefresh === 1) {
         this.refreshGame();
       }  else {
@@ -110,9 +143,44 @@ export class GameManagementComponent implements OnInit {
   }
 
   refreshGame() {
-    this.timeToRefresh = this.refreshInterval;
+    this.gameManagementService.loadGame(this.loadedGame.name)
+      .then(
+        () => {
+          this.gameLoaded = true;
+          this.loadedGame = this.gameManagementService.currentGame;
+          this.updateView();
+          this.setRefreshTimer();
+        })
+      .catch(
+        (err) => {
+          this.statusBarService.setTempStatus('Error - Unable to refresh game. ', err.message);
+          this.onCancelEdit();
+        });
+  }
 
-    //TODO
+  updateView() {
+    switch (this.activeView) {
+      case 0:
+        this.statusTable.updateScores(this.loadedGame);
+        break;
+      case 1:
+        this.tableScores.updateScores(this.loadedGame);
+        break;
+      case 2:
+        this.leaderboardChart.updateScores(this.loadedGame);
+        break;
+      case 3:
+        this.progressChart.updateScores(this.loadedGame);
+        break;
+    }
+  }
+
+  onMoveToNextRound() {
+    if (this.gameManagementService.moveToNextRound()) {
+      //Success
+    } else {
+      this.statusBarService.setTempStatus('Error', 'Game could not move to next round', true);
+    }
   }
 
   isWarRoomNameValid() {
@@ -132,6 +200,19 @@ export class GameManagementComponent implements OnInit {
     }
     this.validWarRoomName = false;
     return;
+  }
+
+  getRoundIcon(round: number): string {
+    if (!this.loadedGame) {
+      return '';
+    }
+    if (round > this.loadedGame.currentRound) {
+      return '';
+    }
+    if (round === this.loadedGame.currentRound) {
+      return 'glyphicon-off'
+    }
+    return 'glyphicon-ok-circle';
   }
 
 }

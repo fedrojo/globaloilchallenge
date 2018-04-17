@@ -1,3 +1,24 @@
-<p>
-  table-scores works!
-</p>
+<div class="main">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th>Team Name</th>
+      <th>R0</th>
+      <th>R1</th>
+      <th>R2</th>
+      <th>R3</th>
+      <th>R4</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let player of currentGame?.players">
+      <td>{{player.name}}</td>
+      <td>{{getPlayerScore(player, 0) | currency:'USD':true:'1.0-0'}}</td>
+      <td>{{getPlayerScore(player, 1) | currency:'USD':true:'1.0-0'}}</td>
+      <td>{{getPlayerScore(player, 2) | currency:'USD':true:'1.0-0'}}</td>
+      <td>{{getPlayerScore(player, 3) | currency:'USD':true:'1.0-0'}}</td>
+      <td>{{getPlayerScore(player, 4) | currency:'USD':true:'1.0-0'}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

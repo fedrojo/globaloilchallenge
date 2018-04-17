@@ -1,35 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import {GameService} from "../../game.service";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AdminService} from "../admin.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ManagementSettings} from "../admin-managment-settings.model";
+import {StatusBarService} from "../status-bar/status-bar.service";
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent implements OnInit, AfterViewInit {
 
   activeTabIndex = 0;
   standAloneForm : FormGroup;
 
-  constructor(private adminService: AdminService  ) {
+  constructor(private adminService: AdminService,
+              private statusBarService: StatusBarService) {
 
     this.standAloneForm = new FormGroup({
       allow: new FormControl({value: 0 } , Validators.required)
     });
 
-
   }
 
   ngOnInit() {
-    // this.adminService.getManagementSettings()
-    //   .subscribe(
-    //     (result) => {
-    //       this.standAloneForm.setValue({allow: result.allowStandAlone ? "1" : "0"});
-    //     }
-    //   );
+
+  }
+
+  ngAfterViewInit() {
+
+
+    this.adminService.getManagementSettings()
+      .subscribe(
+        (result) => {
+          this.standAloneForm.setValue({allow: result.allowStandAlone ? "1" : "0"});
+        }
+      );
   }
 
   onActiveTab(tab: number) {
@@ -41,9 +47,9 @@ export class AdminDashboardComponent implements OnInit {
     managementSettings.allowStandAlone = (this.standAloneForm.value.allow == 1);
 
     if (this.adminService.setManagementSettings(managementSettings)) {
-      // success
+      this.statusBarService.setTempStatus('Changes Saved', '', false);
     } else {
-      // not suxxess
+      this.statusBarService.setTempStatus('Error', 'Changes could not be saved', true);
     }
 
 
