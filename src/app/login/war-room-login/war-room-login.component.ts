@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {GameService} from "../../game.service";
+import {AdminService} from "../../admin-console/admin.service";
 
 
 @Component({
@@ -35,6 +36,8 @@ export class WarRoomLoginComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  passwordMode = false;
+  wrongPassword = false;
   noInternetDetected = false;
   awaitingForStart = false;
   gameAlreadyStarted = false;
@@ -58,7 +61,8 @@ export class WarRoomLoginComponent implements OnInit {
 
 
   constructor(protected statusBarService: StatusBarService,
-              private gameService: GameService) { }
+              private gameService: GameService,
+              private adminService: AdminService) { }
 
   ngOnInit() {
 
@@ -71,6 +75,16 @@ export class WarRoomLoginComponent implements OnInit {
   public initializeWarRoom(teamName: string, warRoomName: string) {
     this.warRoomName = warRoomName;
     this.teamName = teamName;
+    this.noInternetDetected = false;
+    this.awaitingForStart = false;
+    this.gameAlreadyStarted = false;
+    this.validTeamName = true;
+    this.warRoomExists = true;
+    this.generalError = false;
+    this.generalErrorMessage = '';
+    this.passwordMode = false;
+    this.wrongPassword = false;
+    this.timeToRefresh = this.refreshInterval;
 
     // Validate Internet Connection
     if (this.statusBarService.activeConnection) {
@@ -133,6 +147,11 @@ export class WarRoomLoginComponent implements OnInit {
             clearInterval(this.timerRef._id);
           }
           this.gameService.offlineMode = false;
+
+          if (this.timerRef) {
+            clearInterval(this.timerRef._id);
+          }
+
           this.visibleChange.emit(true);
         }
 
@@ -217,6 +236,17 @@ export class WarRoomLoginComponent implements OnInit {
 
   onRetry() {
     this.initializeWarRoom(this.teamName, this.warRoomName);
+  }
+
+  offlineModeGo(e: string) {
+    if (e == this.adminService.roundsPasswords[this.gameService.currentRound]) {
+      if (this.timerRef) {
+        clearInterval(this.timerRef._id);
+      }
+      this.visibleChange.emit(true);
+    } else {
+      this.wrongPassword = true;
+    }
   }
 
 }

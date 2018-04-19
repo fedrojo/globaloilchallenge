@@ -46,7 +46,7 @@
         Retry</a>
     </div>
     <div class="col-xs-4" style="text-align: center">
-      <a class="pointer" *ngIf="showOfflineMode()">
+      <a class="pointer" *ngIf="showOfflineMode()" (click)="passwordMode = true">
         <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
         Offline Mode</a>
     </div>
@@ -54,6 +54,22 @@
       <a class="pointer pull-right" *ngIf="showClose()" (click)="close()">
         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
         Close</a>
+    </div>
+  </div>
+
+  <div class="row align-baseline password-mode" *ngIf="passwordMode">
+    <div class="col-xs-12">
+      <div class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="Password" #passwordOffline>
+        <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="offlineModeGo(passwordOffline.value)">Go!</button>
+      </span>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="passwordMode && wrongPassword">
+    <div class="col-xs-12">
+      <span class="error-text">Wrong password - please try again</span>
     </div>
   </div>
 

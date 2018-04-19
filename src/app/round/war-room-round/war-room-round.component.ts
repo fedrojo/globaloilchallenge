@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {GameService} from "../../game.service";
+import {AdminService} from "../../admin-console/admin.service";
 
 @Component({
   selector: 'app-war-room-round',
@@ -34,6 +35,8 @@ export class WarRoomRoundComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  wrongPassword = false;
+  passwordMode = false;
   noInternetDetected = false;
   awaitingForRound = false;
   generalError = false;
@@ -49,13 +52,17 @@ export class WarRoomRoundComponent implements OnInit {
 
 
   constructor(protected statusBarService: StatusBarService,
-              protected gameService: GameService) { }
+              protected gameService: GameService,
+              private adminService: AdminService) { }
 
   ngOnInit() {
 
   }
 
   public warRoomNextRound() {
+
+    this.wrongPassword = false;
+    this.passwordMode = false;
 
     // Validate Internet Connection
     if (this.statusBarService.activeConnection) {
@@ -158,6 +165,14 @@ export class WarRoomRoundComponent implements OnInit {
 
   onRetry() {
     this.warRoomNextRound();
+  }
+
+  offlineModeGo(e: string) {
+    if (e == this.adminService.roundsPasswords[0]) {
+      this.visibleChange.emit(true);
+    } else {
+      this.wrongPassword = true;
+    }
   }
 
 }

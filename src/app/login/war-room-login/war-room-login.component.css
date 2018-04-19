@@ -63,3 +63,11 @@ hr {
 .progress {
   margin-bottom: 0;
 }
+
+.password-mode {
+  margin-top: 15px ;
+}
+
+.error-text {
+  color: red;
+}
