@@ -43,16 +43,18 @@ export class LeaderboardChartComponent implements OnInit {
 
     let toReturn = [];
 
+    const round =  this.currentGame.currentRound > 4 ? 4 : this.currentGame.currentRound;
+
     for (let player of this.currentGame.players) {
       let toAdd;
-      if (player.currentRound < this.currentGame.currentRound) {
+      if (player.currentRound < round) {
         toAdd = {name: player.name, value: 0};
-      } else if (player.assetValue.length < this.currentGame.currentRound) {
+      } else if (player.assetValue.length < round) {
         toAdd = {name: player.name, value: 0};
-      } else if (!player.assetValue[this.currentGame.currentRound]) {
+      } else if (!player.assetValue[round]) {
         toAdd = {name: player.name, value: 0};
       } else {
-        toAdd = {name: player.name, value: player.assetValue[this.currentGame.currentRound]};
+        toAdd = {name: player.name, value: Math.round(player.assetValue[round])};
       }
       toReturn.push(toAdd);
     }

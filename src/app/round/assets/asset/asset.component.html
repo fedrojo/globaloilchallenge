@@ -1,4 +1,4 @@
-<div [ngClass]="getPanelStyle()" class="panel">
+<div [ngClass]="panelStyle" class="panel">
   <div class="panel-heading pointer" (click)="openAssetCard(asset.name)">{{asset.name}}</div>
   <div class="panel-body">
     <ul class="nav nav-tabs">
@@ -10,7 +10,9 @@
     <div *ngFor="let round of getRounds(); let i = index;">
       <app-asset-round  [ngStyle]="{'display': getRoundToShow() === (i + 1) ? 'block' : 'none'}"
                         [round] = "i + 1"
-                        [asset] = "asset">
+                        [asset] = "asset"
+                        (optionSelected)="setPanelStyle()"
+                        #assetRound>
       </app-asset-round>
     </div>
   </div>

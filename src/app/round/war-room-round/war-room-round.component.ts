@@ -119,13 +119,26 @@ export class WarRoomRoundComponent implements OnInit {
     const path = 'games' + '/' + 'gamesTracker/' + this.gameService.warRoomName
       + '/players/' + this.gameService.teamName;
 
+    const pathDetail = 'games' + '/' + 'gamesDetail/' + this.gameService.warRoomName
+      + '/players/' + this.gameService.teamName;
+
     const tmp = {name: this.gameService.teamName, currentRound: this.gameService.currentRound,
       assetValue: this.gameService.portfolioValues};
 
     return firebase.database().ref(path).set(tmp)
       .then(
         () => {
-          return true;
+          return firebase.database().ref(pathDetail).set(this.gameService.assetSelection)
+            .then(
+              () => {
+                return true;
+              }
+            ).catch(
+              (err) => {
+                console.log(err);
+                return false;
+              }
+            );
         }
       ).catch(
         (err) => {

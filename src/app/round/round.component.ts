@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {GameService} from "../game.service";
 import {Router} from "@angular/router";
 import {WarRoomRoundComponent} from "./war-room-round/war-room-round.component";
+import {AssetsComponent} from "./assets/assets.component";
 
 @Component({
   selector: 'app-round',
@@ -11,6 +12,7 @@ import {WarRoomRoundComponent} from "./war-room-round/war-room-round.component";
 export class RoundComponent implements OnInit {
 
   @ViewChild('warRoomDialog') warRoomDialog: WarRoomRoundComponent;
+  @ViewChild('assetsComponent') assetsComponent: AssetsComponent;
 
   showWarRoomDialog = false;
 
@@ -35,12 +37,14 @@ export class RoundComponent implements OnInit {
 
     if (this.gameService.currentRoundType === 'play') {
       this.gameService.submitRound();
+      this.assetsComponent.nextRound();
       if (!this.gameService.standAloneGame) {
         this.showWarRoomDialog = true;
         this.warRoomDialog.warRoomNextRound();
       }
     } else if (this.gameService.currentRound < this.gameService.rounds.length) {
       this.gameService.nextRound();
+      this.assetsComponent.nextRound();
     } else {
       this.onExit();
     }

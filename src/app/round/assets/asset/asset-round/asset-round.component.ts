@@ -20,6 +20,8 @@ export class AssetRoundComponent implements OnInit {
   @Input() asset: Asset;
   @Input() round: number;
 
+  @Output() optionSelected = new EventEmitter();
+
   loading = false;
 
   constructor(private gameService: GameService) { }
@@ -28,26 +30,45 @@ export class AssetRoundComponent implements OnInit {
 
     this.loading = true;
 
+    this.getBranches();
+
     let selection: number  = this.gameService.getRoundAssetSelection(this.asset.name, this.round);
-
-    this.getBranches()
-
-
 
     this.optionsForm = new FormGroup({
       option: new FormControl({value: selection } , Validators.required)
     });
 
+
     if (selection !== null) {
+      this.optionsForm.value.option = selection;
+
       this.optionsForm.setValue({option: selection});
 
       this.selectedBranch = this.branches[selection];
     }
 
 
+    this.loading = false;
+  }
 
+  public updateSelection() {
+
+    this.loading = true;
+
+    let selection: number  =  this.gameService.getRoundAssetSelection(this.asset.name, this.round);
+
+    if (selection !== null) {
+
+      this.optionsForm.value.option = selection;
+
+      this.optionsForm.setValue({option: selection});
+
+      this.selectedBranch = this.branches[selection];
+
+    }
 
     this.loading = false;
+
   }
 
   getBranches() {
@@ -81,6 +102,7 @@ export class AssetRoundComponent implements OnInit {
   }
 
   onOptionChanged() {
+
     if (this.loading) {
       return;
     }
@@ -91,6 +113,7 @@ export class AssetRoundComponent implements OnInit {
     if (this.optionsForm.valid) {
       this.selectedBranch = this.branches[this.optionsForm.value.option];
       this.gameService.updateSelection(this.asset.name, this.optionsForm.value.option);
+      this.optionSelected.emit();
     }
   }
 

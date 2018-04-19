@@ -57,7 +57,7 @@ export class ProgressChartComponent implements OnInit {
         } else if (!player.assetValue[roundCount]) {
           toAdd.series.push({name: round, value: 0});
         } else {
-          toAdd.series.push({name: round, value: player.assetValue[roundCount]});
+          toAdd.series.push({name: round, value: Math.round(player.assetValue[roundCount])});
         }
         roundCount++;
       }

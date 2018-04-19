@@ -172,11 +172,11 @@ export class WarRoomLoginComponent implements OnInit {
           this.warRoomExists  = true;
           const snapJson = snapshot.toJSON();
           this.currentWarRoomRound = snapJson['currentRound'];
-          if (this.currentWarRoomRound > 0 ) {
-            this.gameAlreadyStarted = true;
-          } else {
+          // if (this.currentWarRoomRound > 0 ) {
+          //   this.gameAlreadyStarted = true;
+          // } else {
             this.gameAlreadyStarted = false;
-          }
+          // }
 
         }
 

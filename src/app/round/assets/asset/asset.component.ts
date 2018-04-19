@@ -1,10 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Asset} from "../asset.model";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Validator} from "codelyzer/walkerFactory/walkerFn";
-import {AssetsService} from "../assets.service";
 import {GameService} from "../../../game.service";
-import {Branch} from "../branch.model";
+import {AssetRoundComponent} from "./asset-round/asset-round.component";
 
 @Component({
   selector: 'app-asset',
@@ -15,6 +12,7 @@ export class AssetComponent implements OnInit {
 
 
   @Input()  asset: Asset;
+  @ViewChildren('assetRound') assetRound: QueryList<AssetRoundComponent>;
 
   roundToShow = 1;
   activeRoundWhenRoundToShowClicked = 1;
@@ -24,11 +22,12 @@ export class AssetComponent implements OnInit {
   panelDanger = 'panel-danger';
   panelDefault = 'panel-default';
 
+  panelStyle = 'panel-default';
+
   constructor (private gameService: GameService) { }
 
   ngOnInit() {
     this.roundToShow = this.gameService.currentRound;
-
   }
 
 
@@ -36,21 +35,29 @@ export class AssetComponent implements OnInit {
     return new Array(this.gameService.currentRound);
   }
 
-  getPanelStyle() {
+  public setPanelStyle() {
 
     const sel = this.gameService.getRoundAssetSelection(this.asset.name, this.gameService.currentRound);
 
-    if (sel === null) {
-      return this.panelDanger;
-    }
-
     if (this.gameService.currentRoundType === 'play') {
-      return this.panelSuccess;
+      if (sel === null) {
+        this.panelStyle = this.panelDanger;
+        return;
+      } else {
+        this.panelStyle = this.panelSuccess;
+        return;
+      }
     }
 
-    return this.gameService.isAssetActive(this.gameService.currentRound,this.asset) ?
+    this.panelStyle = this.gameService.isAssetActive(this.gameService.currentRound,this.asset) ?
       this.panelSuccess : this.panelDefault;
 
+  }
+
+  public updateSelection() {
+    const lastRound = this.assetRound.last;
+    lastRound.updateSelection();
+    this.setPanelStyle();
   }
 
   roundClick(round: number) {

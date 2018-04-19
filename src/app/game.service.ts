@@ -42,6 +42,7 @@ export class GameService {
     this.cashInHand = this.initialCash;
     this.companyValuation = this.cashInHand;
     this.assetSelection = [];
+    this.portfolioValues = [];
     for (const asset of this.assets) {
       this.assetSelection.push({asset: asset.name, selections: []});
     }
@@ -68,6 +69,28 @@ export class GameService {
     this.updateCashAndAssetValuation();
   }
 
+  updateNoOptionSelections() {
+
+    for(const asset of this.assets) {
+      let roundCount = 1;
+      let branches = asset.branches;
+      const assetResults = this.assetSelection.find( i => i.asset === asset.name );
+      while (roundCount <= this.currentRound) {
+        const round = assetResults.selections.find( i => i.round === roundCount);
+
+        if (this.currentRound === roundCount) {
+          if (branches.length === 1) {
+            this.updateSelection(asset.name, 0);
+          }
+        } else if (round != null) {
+          branches = branches[round.selection].branches;
+        }
+
+        roundCount++;
+      }
+    }
+  }
+
   submitRound() {
     this.currentRoundType = 'results';
     this.updateCashAndAssetValuation();
@@ -77,6 +100,7 @@ export class GameService {
   nextRound() {
     this.currentRoundType = 'play';
     this.currentRound = this.currentRound + 1;
+    this.updateNoOptionSelections();
     this.updateCashAndAssetValuation();
   }
 

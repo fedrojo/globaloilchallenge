@@ -31,9 +31,16 @@ export class AssetsComponent implements OnInit {
   onRandomSelection() {
     this.gameService.randomSelection();
 
-    this.router.navigateByUrl('/dummy').then(
-      () => {
-        this.router.navigateByUrl('/round');
+    this.assetComponents.forEach(
+      (assetComponent: AssetComponent) => {
+        assetComponent.updateSelection();
+    });
+  }
+
+  public nextRound() {
+    this.assetComponents.forEach(
+      (assetComponent: AssetComponent) => {
+        assetComponent.setPanelStyle();
       });
   }
 
