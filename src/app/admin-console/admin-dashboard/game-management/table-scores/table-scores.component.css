@@ -3,7 +3,7 @@
   border: 1px solid #ddd;
   border-top-color: transparent;
   border-bottom-color: transparent;
-  height: 300px;
+  min-height: 300px;
 
 }
 

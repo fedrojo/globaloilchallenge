@@ -8,11 +8,15 @@ import {Branch} from "./round/assets/branch.model";
 @Injectable()
 export class GameService {
 
+  standAloneGame = true;
+  offlineMode = false;
+
   initialCash = 3000;
 
   gameStarted = false;
 
   teamName = 'Team Name';
+  warRoomName = '';
 
   assets: Asset[];
   rounds: Round[];
@@ -37,7 +41,6 @@ export class GameService {
     this.currentRoundType = 'play';
     this.cashInHand = this.initialCash;
     this.companyValuation = this.cashInHand;
-    this.portfolioValues = [];
     this.assetSelection = [];
     for (const asset of this.assets) {
       this.assetSelection.push({asset: asset.name, selections: []});

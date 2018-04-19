@@ -5,3 +5,12 @@
 
 combo-chart-component {
 }
+
+.chart-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 75px;
+  bottom: 0;
+
+}

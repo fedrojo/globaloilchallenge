@@ -18,6 +18,13 @@
 </div>
 <app-footer></app-footer>
 
+<!--Modal War Room-->
+<app-war-room-round [(visible)]="showWarRoomDialog"
+                    (visibleChange)="onWarRoomDialogVisibleChanged($event)"
+                    #warRoomDialog>
+</app-war-room-round>
+
+
 <!-- Modal Exit -->
 <div class="modal fade" id="myModal" tabindex="-1" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">

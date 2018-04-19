@@ -33,6 +33,8 @@ import { LeaderboardChartComponent } from './admin-console/admin-dashboard/game-
 import { ProgressChartComponent } from './admin-console/admin-dashboard/game-management/progress-chart/progress-chart.component';
 import { StatusBarComponent } from './admin-console/status-bar/status-bar.component';
 import {StatusBarService} from "./admin-console/status-bar/status-bar.service";
+import { WarRoomLoginComponent } from './login/war-room-login/war-room-login.component';
+import { WarRoomRoundComponent } from './round/war-room-round/war-room-round.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {StatusBarService} from "./admin-console/status-bar/status-bar.service";
     TableScoresComponent,
     LeaderboardChartComponent,
     ProgressChartComponent,
-    StatusBarComponent
+    StatusBarComponent,
+    WarRoomLoginComponent,
+    WarRoomRoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {GameService} from "../game.service";
 import {Router} from "@angular/router";
+import {WarRoomRoundComponent} from "./war-room-round/war-room-round.component";
 
 @Component({
   selector: 'app-round',
@@ -8,6 +9,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./round.component.css']
 })
 export class RoundComponent implements OnInit {
+
+  @ViewChild('warRoomDialog') warRoomDialog: WarRoomRoundComponent;
+
+  showWarRoomDialog = false;
+
 
   constructor(private gameService: GameService,
               private router: Router) { }
@@ -29,6 +35,10 @@ export class RoundComponent implements OnInit {
 
     if (this.gameService.currentRoundType === 'play') {
       this.gameService.submitRound();
+      if (!this.gameService.standAloneGame) {
+        this.showWarRoomDialog = true;
+        this.warRoomDialog.warRoomNextRound();
+      }
     } else if (this.gameService.currentRound < this.gameService.rounds.length) {
       this.gameService.nextRound();
     } else {
@@ -50,5 +60,10 @@ export class RoundComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  onWarRoomDialogVisibleChanged(success: boolean) {
+    if (success) {
+      this.showWarRoomDialog = false;
+    }
+  }
 
 }

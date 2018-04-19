@@ -11,6 +11,17 @@ import {Router} from "@angular/router";
 })
 export class ResultComponent implements OnInit {
 
+  // Combo Chart
+  lineChartScheme = {
+    name: 'coolthree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b', '#a8385d'
+      // , '#00bfa5', '#7aa3e5'
+    ]
+  };
+
   comboBarScheme = {
     name: 'singleLightBlue',
     selectable: true,
@@ -20,18 +31,9 @@ export class ResultComponent implements OnInit {
     ]
   };
 
-  lineChartScheme = {
-    name: 'coolThree',
-    selectable: true,
-    group: 'Ordinal',
-    domain: [
-      '#01579b', '#7aa3e5'
-    ]
-  };
-
   lineChartSeries: any[] =   [
     {
-      "name": "Portfolio Value",
+      "name": "Oil Price",
       "series": []
     },
   ];
@@ -45,13 +47,14 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
     let roundCount = 1;
-    this.barChartSeries.push({name: "R0", value: this.gameService.rounds[0].oilPriceStart});
-    this.lineChartSeries[0].series.push({name: "R0", value: this.gameService.initialCash});
+    this.barChartSeries.push({name: "R0", value: this.gameService.initialCash});
+    this.lineChartSeries[0].series.push({name: "R0", value: this.gameService.rounds[0].oilPriceStart});
     while (roundCount <= this.gameService.rounds.length) {
       this.barChartSeries.push({name: "R" + roundCount.toFixed(), value: 0 });
       this.lineChartSeries[0].series.push({name: "R" + roundCount.toFixed(), value: 0});
       roundCount++;
     }
+    this.view = undefined;
 
 
   }
@@ -59,19 +62,19 @@ export class ResultComponent implements OnInit {
   getOilPriceSeries() {
     let roundCount = 1;
     while (roundCount <= this.gameService.currentRound) {
-      this.barChartSeries[roundCount].value = this.gameService.rounds[roundCount - 1].oilPriceEnd;
+      this.lineChartSeries[0].series[roundCount].value = this.gameService.rounds[roundCount - 1].oilPriceEnd;
       roundCount++;
     }
-    return this.barChartSeries;
+    return this.lineChartSeries;
   }
 
   getPortfolioValuesSeries() {
     let roundCount = 1;
     while (roundCount <= this.gameService.currentRound) {
-      this.lineChartSeries[0].series[roundCount].value = Math.round(this.gameService.portfolioValues[roundCount]);
+      this.barChartSeries[roundCount].value = Math.round(this.gameService.portfolioValues[roundCount]);
       roundCount++;
     }
-    return this.lineChartSeries;
+    return this.barChartSeries;
   }
 
   getFinalValue() {
@@ -111,6 +114,8 @@ export class ResultComponent implements OnInit {
   }
 
   yRightAxisScale(min, max) {
+    min = 0;
+    max = 200;
     return {min: `${min}`, max: `${max}`};
   }
 
@@ -121,5 +126,6 @@ export class ResultComponent implements OnInit {
   yRightTickFormat(data) {
     return `$${data.toLocaleString()}`;
   }
+
 
 }

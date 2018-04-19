@@ -1,0 +1,67 @@
+<div [@dialog] *ngIf="visible" class="dialog">
+  <app-status-bar></app-status-bar>
+  <div class="alert alert-info" role="alert">
+    <h3><strong><span class="glyphicon glyphicon-tint" aria-hidden="true"></span>Joining War Room</strong></h3>
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>Team: <strong>{{teamName}}</strong></h4>
+      </div>
+      <div class="col-xs-6">
+        <h4>War Room: <strong>{{warRoomName}}</strong></h4>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="awaitingForStart" style="text-align: center; margin-bottom: 20px">
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+      </div>
+    </div>
+    <span style="text-align: center;">
+      <strong>Awaiting for round to start!</strong>
+      <span>Refresh in {{timeToRefresh}}</span>
+        <a class="pointer" (click)="refreshAwaitingForPlayers()">Refresh now</a>
+    </span>
+  </div>
+
+  <div *ngIf="noInternetDetected" class="alert alert-danger" role="alert">
+    No internet connection detected
+  </div>
+  <div *ngIf="!warRoomExists" class="alert alert-danger" role="alert">
+    <strong>ERROR: War room does not exist!</strong>
+  </div>
+  <div *ngIf="gameAlreadyStarted" class="alert alert-danger" role="alert">
+    <strong>ERROR: Game has already started!</strong>
+  </div>
+  <div *ngIf="!validTeamName" class="alert alert-danger" role="alert">
+    <strong>ERROR: Team name already exists!</strong>
+  </div>
+  <div *ngIf="generalError" class="alert alert-danger" role="alert">
+    <strong>ERROR: {{generalErrorMessage}}</strong>
+  </div>
+
+  <div class="row align-baseline">
+    <div class="col-xs-4">
+      <a class="pointer" *ngIf="showRetry()" (click)="onRetry()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+        Retry</a>
+    </div>
+    <div class="col-xs-4" style="text-align: center">
+      <a class="pointer" *ngIf="showOfflineMode()">
+        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+        Offline Mode</a>
+    </div>
+    <div class="col-xs-4">
+      <a class="pointer pull-right" *ngIf="showClose()" (click)="close()">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        Close</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</div>
+<div *ngIf="visible" class="overlay"></div>

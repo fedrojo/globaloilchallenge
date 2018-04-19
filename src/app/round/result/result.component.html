@@ -5,36 +5,38 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-sm-3 col-xs-12">
-        <p>Your portfolio value is <strong>${{getFinalValue() | number: '1.0-0' }}</strong></p>
-        <p>The portfolio has <strong>{{getPortfolioGrowthText()}} {{GetPortfolioGrowth() | number: '1.0-0' }}%</strong></p>
+        <p>Your company value is <strong>${{getFinalValue() | number: '1.0-0' }}</strong></p>
+        <p>The company value has <strong>{{getPortfolioGrowthText()}} {{GetPortfolioGrowth() | number: '1.0-0' }}%</strong></p>
       </div>
-      <div class="col-sm-9 col-xs-12">
-        <combo-chart-component
-          class="chart-container"
-          [view]="view"
-          [scheme]="comboBarScheme"
-          [colorSchemeLine]="lineChartScheme"
-          [results]="getOilPriceSeries()"
-          [animations]="false"
-          [lineChart]="getPortfolioValuesSeries()"
-          [tooltipDisabled]="false"
-          [yAxisTickFormatting]="yLeftTickFormat"
-          [yLeftAxisScaleFactor]="yLeftAxisScale"
-          [yRightAxisScaleFactor]="yRightAxisScale"
-          [yRightAxisTickFormatting]="yRightTickFormat"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="false"
-          [legendTitle]=""
-          [showGridLines]="true"
-          [showXAxisLabel]="false"
-          [showYAxisLabel]="true"
-          [showRightYAxisLabel]="true"
-          [xAxisLabel]=""
-          [yAxisLabel]="'Oil Price'"
-          [yAxisLabelRight]="'Portfolio Value'">
-        </combo-chart-component>
+      <div class="col-sm-9 col-xs-12" style="height: 150px;">
+        <div class="chart-holder">
+          <combo-chart-component
+            class="chart-container"
+            [view]="view"
+            [scheme]="comboBarScheme"
+            [colorSchemeLine]="lineChartScheme"
+            [results]="getPortfolioValuesSeries()"
+            [animations]="false"
+            [lineChart]="getOilPriceSeries()"
+            [tooltipDisabled]="false"
+            [yAxisTickFormatting]="yLeftTickFormat"
+            [yLeftAxisScaleFactor]="yLeftAxisScale"
+            [yRightAxisScaleFactor]="yRightAxisScale"
+            [yRightAxisTickFormatting]="yRightTickFormat"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [legendTitle]=""
+            [showGridLines]="true"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="true"
+            [showRightYAxisLabel]="true"
+            [xAxisLabel]=""
+            [yAxisLabel]="'Portfolio Value'"
+            [yAxisLabelRight]="'Oil Price'">
+          </combo-chart-component>
+        </div>
       </div>
     </div>
 
