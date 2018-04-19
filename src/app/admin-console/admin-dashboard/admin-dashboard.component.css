@@ -6,6 +6,6 @@ li {
   cursor: pointer;
 }
 
-.panel-body {
+.panel-body-main {
   min-height: 500px;
 }

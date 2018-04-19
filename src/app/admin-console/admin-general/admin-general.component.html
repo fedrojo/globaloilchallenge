@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Game Options</div>
+  <div class="panel-body">
+    <form [formGroup]="standAloneForm" class="form-inline">
+      <strong>Stand alone Game: </strong>
+      <label class="radio-inline">
+        <input type="radio" formControlName="allow" value="1" (change)="onStandAloneChanged()">
+        Enabled
+      </label>
+      <label class="radio-inline">
+        <input type="radio" formControlName="allow" value="0" (change)="onStandAloneChanged()">
+        Disabled
+      </label>
+    </form>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Offline Mode Passwords</div>
+  <div class="panel-body">
+    <table class="table table-condensed">
+      <thead>
+      <tr>
+        <th>Round</th>
+        <th>Password</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pwd of roundPasswords; let i = index">
+        <td>R{{i}}</td>
+        <td>{{showRoundPassword[i] === 0 ? '*******' : pwd}}</td>
+        <td><a class="pointer" (click)="showRoundPassword[i] = 1">Show</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

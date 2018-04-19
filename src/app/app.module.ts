@@ -35,6 +35,7 @@ import { StatusBarComponent } from './admin-console/status-bar/status-bar.compon
 import {StatusBarService} from "./admin-console/status-bar/status-bar.service";
 import { WarRoomLoginComponent } from './login/war-room-login/war-room-login.component';
 import { WarRoomRoundComponent } from './round/war-room-round/war-room-round.component';
+import { AdminGeneralComponent } from './admin-console/admin-general/admin-general.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { WarRoomRoundComponent } from './round/war-room-round/war-room-round.com
     ProgressChartComponent,
     StatusBarComponent,
     WarRoomLoginComponent,
-    WarRoomRoundComponent
+    WarRoomRoundComponent,
+    AdminGeneralComponent
   ],
   imports: [
     BrowserModule,

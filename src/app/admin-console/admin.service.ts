@@ -16,6 +16,8 @@ export class AdminService {
   validated = true; //TEMP
   password = "McKGEM";
 
+  roundsPasswords = ['CrudePassword', 'GasProblem','OverABarrel', 'ChristmasTree','GEMRocks'];
+
   constructor() {
     // let connectedRef = firebase.database().ref(".info/connected");
     // connectedRef.on("value", function(snap) {

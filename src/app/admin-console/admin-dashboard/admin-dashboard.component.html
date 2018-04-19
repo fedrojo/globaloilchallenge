@@ -12,20 +12,9 @@
         <li role="presentation" [ngClass]="activeTabIndex === 1 ? 'active' : ''"><a (click)="onActiveTab(1)">Game management</a></li>
       </ul>
     </div>
-    <div class="panel-body">
+    <div class="panel-body panel-body-main">
       <div *ngIf="activeTabIndex === 0">
-        <h4><strong>Game options</strong></h4>
-        <form [formGroup]="standAloneForm" class="form-inline">
-          <strong>Stand alone Game: </strong>
-          <label class="radio-inline">
-            <input type="radio" formControlName="allow" value="1" (change)="onStandAloneChanged()">
-            Enabled
-          </label>
-          <label class="radio-inline">
-            <input type="radio" formControlName="allow" value="0" (change)="onStandAloneChanged()">
-            Disabled
-          </label>
-        </form>
+        <app-admin-general></app-admin-general>
       </div>
       <div *ngIf="activeTabIndex === 1">
         <app-game-management></app-game-management>
