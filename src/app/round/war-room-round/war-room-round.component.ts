@@ -63,6 +63,12 @@ export class WarRoomRoundComponent implements OnInit {
 
     this.wrongPassword = false;
     this.passwordMode = false;
+    this.noInternetDetected = false;
+    this.generalError = false;
+    this.generalErrorMessage = '';
+    this.passwordMode = false;
+    this.wrongPassword = false;
+    this.timeToRefresh = this.refreshInterval;
 
     // Validate Internet Connection
     if (this.statusBarService.activeConnection) {
@@ -112,6 +118,9 @@ export class WarRoomRoundComponent implements OnInit {
             clearInterval(this.timerRef._id);
           }
           this.gameService.offlineMode = false;
+          if (this.timerRef) {
+            clearInterval(this.timerRef._id);
+          }
           this.visibleChange.emit(true);
         }
 
@@ -168,7 +177,10 @@ export class WarRoomRoundComponent implements OnInit {
   }
 
   offlineModeGo(e: string) {
-    if (e == this.adminService.roundsPasswords[0]) {
+    if (e == this.adminService.roundsPasswords[this.gameService.currentRound]) {
+      if (this.timerRef) {
+        clearInterval(this.timerRef._id);
+      }
       this.visibleChange.emit(true);
     } else {
       this.wrongPassword = true;

@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {setInterval} from "timers";
 import {GameManagementService} from "./game-management.service";
 import {Game} from "./game-management.model";
 import {LeaderboardChartComponent} from "./leaderboard-chart/leaderboard-chart.component";

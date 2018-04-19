@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Game} from "../game-management.model";
+import {Game} from '../game-management.model';
 
 @Component({
   selector: 'app-progress-chart',
@@ -21,7 +21,28 @@ export class ProgressChartComponent implements OnInit {
   yAxisLabel = 'Round';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: [
+      '#e6194b',
+      '#3cb44b',
+      '#ffe119',
+      '#0082c8',
+      '#f58231',
+      '#911eb4',
+      '#46f0f0',
+      '#f032e6',
+      '#d2f53c',
+      '#fabebe',
+      '#008080',
+      '#e6beff',
+      '#aa6e28',
+      '#fffac8',
+      '#800000',
+      '#aaffc3',
+      '#808000',
+      '#ffd8b1',
+      '#000080',
+      '#808080',
+      '#000000']
   };
 
   currentGame: Game;
@@ -49,7 +70,7 @@ export class ProgressChartComponent implements OnInit {
       let roundCount = 0;
       let toAdd = {name: player.name, series: []};
       while(roundCount < this.currentGame.currentRound + 1 && roundCount < 5) {
-        let round = "R" + roundCount.toFixed(0);
+        let round = 'R' + roundCount.toFixed(0);
         if (player.currentRound < roundCount) {
           toAdd.series.push({name: round, value: 0});
         } else if (player.assetValue.length < roundCount) {
