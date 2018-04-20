@@ -40,7 +40,7 @@ export class WarRoomLoginComponent implements OnInit {
   wrongPassword = false;
   noInternetDetected = false;
   awaitingForStart = false;
-  gameAlreadyStarted = false;
+  gameFinalized = false;
   validTeamName = true;
   warRoomExists = true;
   generalError = false;
@@ -77,7 +77,7 @@ export class WarRoomLoginComponent implements OnInit {
     this.teamName = teamName;
     this.noInternetDetected = false;
     this.awaitingForStart = false;
-    this.gameAlreadyStarted = false;
+    this.gameFinalized = false;
     this.validTeamName = true;
     this.warRoomExists = true;
     this.generalError = false;
@@ -93,7 +93,7 @@ export class WarRoomLoginComponent implements OnInit {
       this.validateWarRoomName()
         .then(
         () => {
-          if (this.warRoomExists && !this.gameAlreadyStarted) {
+          if (this.warRoomExists && !this.gameFinalized) {
             this.validateTeamName()
               .then(
                 () => {
@@ -191,11 +191,11 @@ export class WarRoomLoginComponent implements OnInit {
           this.warRoomExists  = true;
           const snapJson = snapshot.toJSON();
           this.currentWarRoomRound = snapJson['currentRound'];
-          // if (this.currentWarRoomRound > 0 ) {
-          //   this.gameAlreadyStarted = true;
-          // } else {
-            this.gameAlreadyStarted = false;
-          // }
+          if (this.currentWarRoomRound === 5 ) {
+            this.gameFinalized = true;
+          } else {
+            this.gameFinalized = false;
+          }
 
         }
 
@@ -230,7 +230,7 @@ export class WarRoomLoginComponent implements OnInit {
 
   showClose() {
     return (this.noInternetDetected || !this.warRoomExists ||
-      this.gameAlreadyStarted || !this.validTeamName || this.generalError);
+      this.gameFinalized || !this.validTeamName || this.generalError);
   }
 
   onRetry() {

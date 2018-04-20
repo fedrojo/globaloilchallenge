@@ -30,8 +30,8 @@
   <div *ngIf="!warRoomExists" class="alert alert-danger" role="alert">
     <strong>ERROR: War room does not exist!</strong>
   </div>
-  <div *ngIf="gameAlreadyStarted" class="alert alert-danger" role="alert">
-    <strong>ERROR: Game has already started!</strong>
+  <div *ngIf="gameFinalized" class="alert alert-danger" role="alert">
+    <strong>ERROR: Game has finished!</strong>
   </div>
   <div *ngIf="!validTeamName" class="alert alert-danger" role="alert">
     <strong>ERROR: Team name already exists!</strong>
