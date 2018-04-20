@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class AdminConsoleComponent implements OnInit {
 
+  wrongPassword = false;
+
   constructor(private adminService: AdminService,
               private router: Router) { }
 
@@ -19,6 +21,8 @@ export class AdminConsoleComponent implements OnInit {
     if (e) {
       if (this.adminService.login(e)) {
         this.router.navigate(['admindashboard']);
+      } else {
+        this.wrongPassword = true;
       }
     }
   }

@@ -120,7 +120,7 @@ export class WarRoomLoginComponent implements OnInit {
     this.timeToRefresh = this.refreshInterval;
 
     if (this.timerRef) {
-      clearInterval(this.timerRef._id);
+      clearInterval(this.timerRef);
     }
 
     this.timerRef = setInterval( () => {
@@ -240,7 +240,7 @@ export class WarRoomLoginComponent implements OnInit {
   offlineModeGo(e: string) {
     if (e == this.adminService.roundsPasswords[0]) {
       if (this.timerRef) {
-        clearInterval(this.timerRef._id);
+        clearInterval(this.timerRef);
       }
       this.visibleChange.emit(true);
     } else {

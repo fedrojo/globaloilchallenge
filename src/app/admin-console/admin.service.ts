@@ -13,20 +13,12 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AdminService {
 
-  validated = true; //TEMP
+  validated = false;
   password = "McKGEM";
 
   roundsPasswords = ['CrudePassword', 'GasProblem','OverABarrel', 'ChristmasTree','GEMRocks'];
 
   constructor() {
-    // let connectedRef = firebase.database().ref(".info/connected");
-    // connectedRef.on("value", function(snap) {
-    //   if (snap.val() === true) {
-    //     this.connected = true;
-    //   } else {
-    //     this.connected = false;
-    //   }
-    // });
 
   }
 

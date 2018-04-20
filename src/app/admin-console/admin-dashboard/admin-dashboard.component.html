@@ -14,13 +14,13 @@
       </ul>
     </div>
     <div class="panel-body panel-body-main">
-      <div *ngIf="activeTabIndex === 0">
+      <div [ngClass]="activeTabIndex === 0 ? '' : 'display-none'">
         <app-admin-general></app-admin-general>
       </div>
-      <div *ngIf="activeTabIndex === 1">
+      <div [ngClass]="activeTabIndex === 1 ? '' : 'display-none'">
         <app-game-management></app-game-management>
       </div>
-      <div *ngIf="activeTabIndex === 2">
+      <div [ngClass]="activeTabIndex === 2 ? '' : 'display-none'">
         <app-admin-ranking></app-admin-ranking>
       </div>
     </div>

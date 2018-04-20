@@ -9,3 +9,7 @@ li {
 .panel-body-main {
   min-height: 500px;
 }
+
+.display-none {
+  display: none;
+}

@@ -91,7 +91,7 @@ export class WarRoomRoundComponent implements OnInit {
     this.timeToRefresh = this.refreshInterval;
 
     if (this.timerRef) {
-      clearInterval(this.timerRef._id);
+      clearInterval(this.timerRef);
     }
 
     this.timerRef = setInterval( () => {
@@ -179,7 +179,7 @@ export class WarRoomRoundComponent implements OnInit {
   offlineModeGo(e: string) {
     if (e == this.adminService.roundsPasswords[this.gameService.currentRound]) {
       if (this.timerRef) {
-        clearInterval(this.timerRef._id);
+        clearInterval(this.timerRef);
       }
       this.visibleChange.emit(true);
     } else {

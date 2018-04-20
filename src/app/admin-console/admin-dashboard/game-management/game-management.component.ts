@@ -83,7 +83,7 @@ export class GameManagementComponent implements OnInit {
     }
 
     if (this.timerRef) {
-      clearInterval(this.timerRef._id)
+      clearInterval(this.timerRef)
       this.timerRef = null;
     }
 
@@ -128,9 +128,9 @@ export class GameManagementComponent implements OnInit {
   setRefreshTimer() {
     this.timeToRefresh = this.refreshInterval;
     if (this.timerRef) {
-      clearInterval(this.timerRef._id);
+      clearInterval(this.timerRef);
+      this.timerRef = null;
     }
-
 
     this.timerRef = setInterval( () => {
       if (this.timeToRefresh === 1) {
@@ -148,7 +148,7 @@ export class GameManagementComponent implements OnInit {
           this.gameLoaded = true;
           this.loadedGame = this.gameManagementService.currentGame;
           this.updateView();
-          this.setRefreshTimer();
+          this.timeToRefresh = this.refreshInterval;
         })
       .catch(
         (err) => {
