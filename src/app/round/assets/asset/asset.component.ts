@@ -73,7 +73,7 @@ export class AssetComponent implements OnInit {
   }
 
   openAssetCard(assetName: string) {
-    // window.open('/assets/' + assetName + '.pdf');
+    window.open('/assets/' + assetName + '.pdf');
   }
 
 }
