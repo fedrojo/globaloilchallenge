@@ -10,6 +10,7 @@
       <ul class="nav nav-pills">
         <li role="presentation" [ngClass]="activeTabIndex === 0 ? 'active' : ''"><a (click)="onActiveTab(0)">General</a></li>
         <li role="presentation" [ngClass]="activeTabIndex === 1 ? 'active' : ''"><a (click)="onActiveTab(1)">Game management</a></li>
+        <li role="presentation" [ngClass]="activeTabIndex === 2 ? 'active' : ''"><a (click)="onActiveTab(2)">Rankings</a></li>
       </ul>
     </div>
     <div class="panel-body panel-body-main">
@@ -18,6 +19,9 @@
       </div>
       <div *ngIf="activeTabIndex === 1">
         <app-game-management></app-game-management>
+      </div>
+      <div *ngIf="activeTabIndex === 2">
+        <app-admin-ranking></app-admin-ranking>
       </div>
     </div>
   </div>

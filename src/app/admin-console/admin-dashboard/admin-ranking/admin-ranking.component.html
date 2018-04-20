@@ -1,0 +1,26 @@
+<div class="row" style="align-content: center">
+  <button class="btn btn-primary btn-ranking"
+          [disabled]="loadingRanking"
+          (click)="onLoadRanking()">
+          {{loadingRanking ? 'Loading Rankings' : 'Load Rankings'}}
+  </button>
+</div>
+<hr>
+<table class="table table-condensed">
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>War Room</th>
+    <th>Team Name</th>
+    <th>Company Value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let rankItem of rankItems; let i = index">
+    <td>{{i+1}}</td>
+    <td>{{rankItem.warRoom}}</td>
+    <td>{{rankItem.teamName}}</td>
+    <td>{{rankItem.companyValue | currency:'USD':true:'1.0-0'}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {StatusBarService} from "../status-bar/status-bar.service";
-import {AdminService} from "../admin.service";
+import {StatusBarService} from "../../status-bar/status-bar.service";
+import {AdminService} from "../../admin.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ManagementSettings} from "../admin-managment-settings.model";
+import {ManagementSettings} from "../../admin-managment-settings.model";
 
 @Component({
   selector: 'app-admin-general',

@@ -8,7 +8,7 @@ import {StatusBarService} from "./status-bar.service";
 })
 export class StatusBarComponent implements OnInit {
 
-  constructor(protected statusBarService: StatusBarService) { }
+  constructor(public statusBarService: StatusBarService) { }
 
   ngOnInit() {
   }

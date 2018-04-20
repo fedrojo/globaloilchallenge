@@ -206,7 +206,6 @@ export class WarRoomLoginComponent implements OnInit {
 
   private validateTeamName() {
     const path = 'games' + '/' + 'gamesTracker/' + this.warRoomName + '/players/' + this.teamName;
-    console.log(path);
     return firebase.database().ref( path)
       .once('value', (snapshot) => {
 
